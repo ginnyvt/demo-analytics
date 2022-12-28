@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS `sales` (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  store VARCHAR(255) NOT NULL,
+  product VARCHAR(255) NOT NULL,
+  sales_day DATE NOT NULL,
+  sales_time TIME NOT NULL,
+  sales_amount NUMERIC(10,4) ,
+  CHECK (sales_amount >= 0)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
