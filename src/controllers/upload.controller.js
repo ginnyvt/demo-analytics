@@ -21,30 +21,30 @@ async function upload(req, res) {
 						from_line: 2,
 					})
 				)
-				.on("data", (row) => {
+				.on("data", async (row) => {
 					const transformedRow = transformData(row);
-					console.log(transformedRow);
-					parsedData.push(transformedRow);
+					if (transformedRow[4] >= 0) {
+						parsedData.push(transformedRow);
+					}
+
 					if (parsedData.length === 20000) {
-						sendToDb(parsedData);
+						await sendToDb(parsedData);
 						parsedData = [];
 					}
 				})
 				.on("error", (error) => {
-					throw new Error(error.message);
+					throw error;
 				})
-				.on("end", () => {
-					sendToDb(parsedData);
+				.on("end", async () => {
+					await sendToDb(parsedData);
 					console.log("Finished");
 					fs.unlinkSync(inputPath);
-					return res.status(201).send({
-						message: "Import data to database succeeded",
-					});
+					res.status(200).send({ message: "Succeeded!" });
 				});
 		}
 	} catch (error) {
-		res.status(500).send({
-			message: "Failed to import data to database",
+		return res.status(500).send({
+			message: "Failed to import data to database.",
 		});
 	}
 }
