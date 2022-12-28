@@ -1,10 +1,16 @@
-const fs = require("fs");
-const path = require("path");
+const sql = require("../databases/db");
+const moment = require("moment");
 
 const _ = require("lodash");
 
-function sendToDb(data) {
-	console.log("Inserting " + data.length);
+async function sendToDb(data) {
+	let sqlQuery = "INSERT INTO sales (store, product, sales_day, sales_time, sales_amount) VALUES ?";
+
+	sql.query(sqlQuery, [data], (error, response) => {
+		if (error) {
+			throw new Error(error.message);
+		}
+	});
 }
 
 function transformData(data) {
@@ -16,9 +22,9 @@ function transformData(data) {
 		transformedData[1] = data[1];
 	}
 	if (!_.isEmpty(data[2])) {
-		const datetime = new Date(data[2]);
-		const date = datetime.toLocaleDateString();
-		const time = datetime.toLocaleTimeString();
+		const datetime = moment(data[2]);
+		const date = datetime.format("YYYY-MM-DD");
+		const time = datetime.format("HH:mm:ss");
 		transformedData[2] = date;
 		transformedData[3] = time;
 	}
