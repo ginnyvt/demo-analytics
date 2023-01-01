@@ -1,7 +1,9 @@
 {
   "name": "demo-client",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "Ginny Tran",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
