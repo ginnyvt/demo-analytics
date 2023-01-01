@@ -2,7 +2,7 @@
 
 This is a demonstration project that uses generated data and allows users to upload a CSV file to view the results as graphs and tables.
 
-Data was generated with the Faker.js library, written to a JSON file, and then converted to CSV for use as a "demo.csv" file. Go to "./server/src/utils/fake_data.js" to learn more about how data was generated.
+Data was generated with the Faker.js library, written to a JSON file, and then converted to CSV for use as a "demo.csv" file. Go to <strong>"./server/src/utils/fake_data.js"</strong> to learn more about how data was generated.
 
 ## Tech Stack
 
@@ -56,3 +56,7 @@ Link to demo
 ## Authors
 
 - [ginnyvt](https://github.com/ginnyvt)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
