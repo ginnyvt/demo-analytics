@@ -1,4 +1,4 @@
-const sql = require("../databases/db");
+const sql = require("../db");
 const moment = require("moment");
 
 const _ = require("lodash");

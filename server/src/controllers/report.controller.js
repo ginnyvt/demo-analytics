@@ -1,5 +1,5 @@
 const _ = require("lodash");
-const sql = require("../../databases/db");
+const sql = require("../db");
 
 async function reportSales(req, res) {
 	const year = req.query.year ?? new Date(2022, 11, 31).getFullYear().toString();

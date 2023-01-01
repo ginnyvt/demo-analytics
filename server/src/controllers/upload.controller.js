@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { parse } = require("csv-parse");
 
-const { sendToDb, transformData } = require("../../utils/process_data");
+const { sendToDb, transformData } = require("../utils/process_data");
 
 async function upload(req, res) {
 	try {
