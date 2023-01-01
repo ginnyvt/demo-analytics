@@ -2,11 +2,11 @@ const _ = require("lodash");
 const sql = require("../../databases/db");
 
 async function reportSales(req, res) {
-	const year = req.query.year ?? new Date().getFullYear().toString();
+	const year = req.query.year ?? new Date(2022, 11, 31).getFullYear().toString();
 	const by = req.query.by ?? "store";
 
 	if (!isNumeric(year) || !["store", "product"].includes(by)) {
-		res.status(400).send({
+		return res.send({
 			message: "Invalid request",
 		});
 	}
@@ -16,7 +16,7 @@ async function reportSales(req, res) {
 
 		sql.query(sqlQuery, function (err, results) {
 			if (err === null) {
-				res.status(200).send({
+				return res.send({
 					data: results,
 				});
 			} else {
@@ -24,7 +24,7 @@ async function reportSales(req, res) {
 			}
 		});
 	} catch (error) {
-		res.status(500).send({
+		return res.send({
 			message: "Something went wrong",
 		});
 	}
