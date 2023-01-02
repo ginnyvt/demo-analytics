@@ -10,7 +10,7 @@ function UploadFile() {
 	const [error, setError] = useState(null);
 
 	async function uploadFileHandler(e) {
-		const url = `${BASE_URL}/upload`;
+		const url = `${BASE_URL}/api/upload`;
 		e.preventDefault();
 		const formData = new FormData();
 		formData.append("demo", file);
@@ -27,7 +27,9 @@ function UploadFile() {
 				alert("File uploaded successfully!");
 			}
 		} catch (error) {
-			setError(error);
+			console.log(err);
+			setIsLoading(false);
+			setError(err.message);
 		}
 	}
 
