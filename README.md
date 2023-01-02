@@ -2,7 +2,8 @@
 
 This is a demonstration project that uses generated data and allows users to upload a CSV file to view the results as graphs and tables.
 
-Data was generated with the Faker.js library, written to a JSON file, and then converted to CSV for use as a "demo.csv" file. Go to <strong>"./server/src/utils/fake_data.js"</strong> to learn more about how data was generated.
+Data was generated with the Faker.js library, written to a JSON file, and then converted to CSV for use as a "demo.csv" file.
+Go to <strong>"./server/src/utils/fake_data.js"</strong> to learn more about how data was generated.
 
 ## Tech Stack
 
@@ -10,15 +11,20 @@ Data was generated with the Faker.js library, written to a JSON file, and then c
 
 **Server:** Node, Express, MySQL
 
-## Getting started
+## Run locally
 
-Clone the project
+Clone the project and make sure you have node, npm installed on your local machine.
 
 ```bash
   git clone git@github.com:ginnyvt/demo-analytics.git
 ```
 
-Make sure you have node, npm installed on your local machine.
+To generate new dataset, run
+
+```bash
+  npx json2csv -i path/to/fake_data.json -f store,product,date,sales -o new_file_name.csv
+```
+
 To run client, go to the client directory
 
 ```bash
@@ -51,7 +57,7 @@ Install dependencies and start backend server
 
 ## Demo
 
-Link to demo
+Link to [demo](https://demo-client-bhs.pages.dev/)
 
 ## Authors
 
