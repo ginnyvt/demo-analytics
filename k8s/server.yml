@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: demo-analytics-depl
+spec:
+ replicas: 2
+ selector:
+  matchLabels:
+   app: demo-analytics
+ template:
+  metadata:
+   labels:
+    app: demo-analytics
+  spec:
+   containers:
+    - name: demo-analytics
+      image: ginnyvt/demo-analytics-server:latest
+      envFrom:
+       - secretRef:
+          name: env
+      resources:
+       requests:
+        memory: "128Mi"
+        cpu: "0.25"
+       limits:
+        memory: "256Mi"
+        cpu: "0.5"
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: demo-analytics-srv
+spec:
+ selector:
+  app: demo-analytics
+ ports:
+  - name: demo-analytics
+    protocol: TCP
+    port: 8000
+    targetPort: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+ name: demo-analytics-ingress
+spec:
+ rules:
+  - host: demo-analytics.ginnyvt.cloud.okteto.net
+    http:
+     paths:
+      - path: /
+        pathType: Prefix
+        backend:
+         service:
+          name: demo-analytics-srv
+          port:
+           number: 8000
