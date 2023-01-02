@@ -3,6 +3,8 @@ import axios from "axios";
 
 import Table from "../layouts/Table";
 
+const BASE_URL = import.meta.env.VITE_SERVER_ENDPOINT;
+
 function ProductReport() {
 	const [fetchedData, setFetchedData] = useState([]);
 	const [year, setYear] = useState("");
@@ -26,7 +28,7 @@ function ProductReport() {
 		try {
 			const { data } = await axios({
 				method: "GET",
-				url: "http://localhost:8000/api/reports/sales",
+				url: `${BASE_URL}/api/reports/sales`,
 				params: fetchedParams,
 			});
 			const transformedData = data.data.map((item, index) => {
@@ -39,6 +41,8 @@ function ProductReport() {
 			setFetchedData(transformedData);
 		} catch (err) {
 			console.log(err);
+			setIsLoading(false);
+			setError(err.message);
 		}
 	}
 

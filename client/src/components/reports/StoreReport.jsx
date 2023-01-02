@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 
+const BASE_URL = import.meta.env.VITE_SERVER_ENDPOINT;
+
 function StoreReport() {
 	ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -41,7 +43,7 @@ function StoreReport() {
 		try {
 			const { data } = await axios({
 				method: "GET",
-				url: "http://localhost:8000/api/reports/sales",
+				url: `${BASE_URL}/api/reports/sales`,
 				params: fetchedParams,
 			});
 			setIsLoading(false);
@@ -68,6 +70,8 @@ function StoreReport() {
 			}
 		} catch (err) {
 			console.log(err);
+			setIsLoading(false);
+			setError(err.message);
 		}
 	}
 
