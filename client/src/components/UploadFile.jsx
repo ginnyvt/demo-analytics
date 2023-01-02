@@ -2,13 +2,15 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+const BASE_URL = import.meta.env.VITE_SERVER_ENDPOINT;
+
 function UploadFile() {
 	const [file, setFile] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
 
 	async function uploadFileHandler(e) {
-		const url = "http://localhost:8000/api/upload";
+		const url = `${BASE_URL}/upload`;
 		e.preventDefault();
 		const formData = new FormData();
 		formData.append("demo", file);
